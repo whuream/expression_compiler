@@ -18,7 +18,7 @@ class syntax_tree():
                               ',' if item[1] == ',' else
                               '-' if item[1] == '-' else
                               'fo' if re.match(r'sin|cos|tan|asin|acos|atan|ln|lg', item[1]) else
-                              'f2' if item[1] == 'log' else 'mo' if re.match(r'\+|\*|/|\*', item[1]) else
+                              'f2' if item[1] == 'log' else 'mo' if re.match(r'\+|\*|/|\^', item[1]) else
                               None,
                       'value': int(item[1]) if re.match(r'\d+', item[1]) else
                                3.14 if item[1] == 'PI' else
@@ -50,11 +50,16 @@ class syntax_tree():
         self.terminal = ['(', '-', 'fo', 'num', 'f2', 'mo', ')', ',', 'E']
         self.unterminal = ['S', 'I', 'I\'', 'm2', 'f1']
         self.tree = ['S', []]
-        self.flag = True
-        try:
-            self.solve(self.tree)
-        except Exception:
-            self.flag = False
+        self.flag = False
+        if self.legal:
+            try:
+                self.solve(self.tree)
+            except Exception:
+                print self.tree
+                self.flag = False
+            self.flag = True
+        else:
+            self.flag = True
 
     def solve(self, node):
         if node[0] in self.terminal:
