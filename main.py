@@ -68,4 +68,5 @@ def main():
     control(middle_name, out_name)
 
 if __name__ == '__main__':
+    #sys.argv.append('in.txt')
     main()
