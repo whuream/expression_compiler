@@ -10,6 +10,7 @@ class syntax_tree():
         self.list = re.findall(
             r'^Find ((\d+|\+|-|\*|/|\^|e|PI|,|log|sin|cos|tan|asin|acos|atan|ln|lg|\(|\)) in (\d+) to (\d+))',
             content, re.M)
+        self.list.append(['', '$', 0, 0])
         self.list.reverse()
         self.item = [{'symbol': item[1],
                       'type': 'num' if re.match(r'\d+|PI|e', item[1]) else
@@ -19,7 +20,7 @@ class syntax_tree():
                               '-' if item[1] == '-' else
                               'fo' if re.match(r'sin|cos|tan|asin|acos|atan|ln|lg', item[1]) else
                               'f2' if item[1] == 'log' else 'mo' if re.match(r'\+|\*|/|\^', item[1]) else
-                              None,
+                              item[1],
                       'value': int(item[1]) if re.match(r'\d+', item[1]) else
                                3.14 if item[1] == 'PI' else
                                2.72 if item[1] == 'e' else
@@ -63,7 +64,7 @@ class syntax_tree():
 
     def solve(self, node):
         if node[0] in self.terminal:
-            if node[0] != 'E':
+            if node[0] != 'E' and self.item[-1] != '$':
                 self.item.pop()
             return
         if not self.item:
