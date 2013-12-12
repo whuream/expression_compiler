@@ -13,6 +13,11 @@ class semantic_ana():
 
         self.analysis_tree3(self.tree[1][0])
 
+        self.tuple_4 = []
+        self.id = 1
+        self.tree.append({})
+        self.analysis_tree4(self.tree)
+
 
     def analysis_tree(self, p_node, node):  # 去除单链
         if len(node[1]) == 1:
@@ -44,12 +49,31 @@ class semantic_ana():
                 children.remove(item)
                 if len(item[1]) == 0:  # item is a leaf node
                     node[0] = item[0]
-                    #node[2] = item[2]
+                    node[2] = item[2]
                 else:                  # item is not a leaf node
                     node[0] = item[0]
                     node[1] += item[1]
-                    #node[2] = item[2]
+                    node[2] = item[2]
 
+    def analysis_tree4(self, node):  # get label(value) of operators
+        children = node[1]
+        for item in children:
+            if item[0] != 'num':
+                if not item[2].get('id'):
+                    self.analysis_tree4(item)
+
+        node[2]['value'] = self.id
+        self.id += 1
+        l = [node[0]]
+        for item in children:
+            if item[0] != 'num':
+                l.append('id' + str(item[2].get('value')))
+            else:
+                l.append(item[2].get('value'))
+        if len(l) == 2:
+            l.append(None)
+        l.append('id' + str(node[2].get('value')))
+        self.tuple_4.append([i for i in l])
 
     def clear_list(self, l):
         for i in range(0, len(l)):

@@ -75,8 +75,8 @@ class syntax_tree():
             begin, end = self.item[-1].get('field')
             print 'synatax analysis failed.\nbegin in %s, end in %s, symbol: %s' %(begin, end, symbol)
             raise Exception
-        #node[1] = [[i, [], self.item[-1]] for i in ex]
-        node[1] = [[i, []] for i in ex]
+        node[1] = [[i, [], self.item[-1]] for i in ex]
+        #node[1] = [[i, []] for i in ex]
         for i in node[1]:
             self.solve(i)
 

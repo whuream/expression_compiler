@@ -16,5 +16,6 @@ if m.legal and m.flag:
 
 m2 = semantic_ana(m.tree)
 print m2.tree
+print m2.tuple_4
 
 
