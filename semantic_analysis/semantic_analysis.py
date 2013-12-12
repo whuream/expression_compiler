@@ -54,6 +54,7 @@ class semantic_ana():
                     node[0] = item[0]
                     node[1] += item[1]
                     node[2] = item[2]
+                break
 
     def analysis_tree4(self, node):  # get label(value) of operators
         children = node[1]
@@ -64,7 +65,7 @@ class semantic_ana():
 
         node[2]['value'] = self.id
         self.id += 1
-        l = [node[0]]
+        l = [node[2].get('symbol')]
         for item in children:
             if item[0] != 'num':
                 l.append('id' + str(item[2].get('value')))
