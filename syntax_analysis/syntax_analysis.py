@@ -64,7 +64,7 @@ class syntax_tree():
 
     def solve(self, node):
         if node[0] in self.terminal:
-            if node[0] != 'E' and self.item[-1] != '$':
+            if node[0] != 'E' and self.item[-1].get('type') != '$':
                 self.item.pop()
             return
         if not self.item:
@@ -75,6 +75,7 @@ class syntax_tree():
             begin, end = self.item[-1].get('field')
             print 'synatax analysis failed.\nbegin in %s, end in %s, symbol: %s' %(begin, end, symbol)
             raise Exception
+        #node[1] = [[i, [], self.item[-1]] for i in ex]
         node[1] = [[i, []] for i in ex]
         for i in node[1]:
             self.solve(i)
