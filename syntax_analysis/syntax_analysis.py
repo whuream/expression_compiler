@@ -51,16 +51,13 @@ class syntax_tree():
         self.terminal = ['(', '-', 'fo', 'num', 'f2', 'mo', ')', ',', 'E']
         self.unterminal = ['S', 'I', 'I\'', 'm2', 'f1']
         self.tree = ['S', []]
-        self.flag = False
+        self.flag = True
         if self.legal:
             try:
                 self.solve(self.tree)
             except Exception:
                 print self.tree
                 self.flag = False
-            self.flag = True
-        else:
-            self.flag = True
 
     def solve(self, node):
         if node[0] in self.terminal:
@@ -73,7 +70,7 @@ class syntax_tree():
         if not ex:
             symbol = self.item[-1].get('symbol')
             begin, end = self.item[-1].get('field')
-            print 'synatax analysis failed.\nbegin in %s, end in %s, symbol: %s' %(begin, end, symbol)
+            print '\nsynatax analysis failed.\nbegin in %s, end in %s, symbol: %s' %(begin, end, symbol)
             raise Exception
         node[1] = [[i, [], self.item[-1]] for i in ex]
         #node[1] = [[i, []] for i in ex]
