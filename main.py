@@ -16,3 +16,6 @@ if m.legal and m.flag:
 
 m2 = semantic_ana(m.tree)
 print m2.tree
+
+
+a = [1,2,3,4]
