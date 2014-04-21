@@ -56,13 +56,13 @@ def main():
         win = True
         abspath = abspath[:index]
         #middle_name = now_path + '\\' + middle_name
-        com = abspath + '\\compiler.exe' + ' ' + in_name + ' ' + middle_name
+        com = abspath + '\\lexical_analysis\\compiler.exe' + ' ' + in_name + ' ' + middle_name
     else:
         index = abspath.rfind('/')
         win = False
         abspath = abspath[:index]
         #middle_name = now_path + '/' + middle_name
-        com = abspath + '/compiler.exe' + ' ' + in_name + ' ' + middle_name
+        com = abspath + '/lexical_analysis/compiler.exe' + ' ' + in_name + ' ' + middle_name
 
     os.system(com)
     control(middle_name, out_name)
